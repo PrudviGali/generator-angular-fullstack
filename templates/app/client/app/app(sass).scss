@@ -27,8 +27,9 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   }
 }
 <% } %>
-// Component styles are injected through gulp
-/* inject:scss */
+
+[hidden] {
+  display: none !important;
+}
+
 @import 'admin/admin.scss';
-@import 'main/main.scss';
-/* endinject */
