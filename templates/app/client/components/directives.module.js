@@ -7,21 +7,27 @@ import { AuthModule } from './auth/auth.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+<%_ if(filters.oauth) { -%>
+import { OauthButtonsComponent } from './oauth-buttons/oauth-buttons.component';<% } %>
 
 export let DirectivesModule = @NgModule({
-    imports: [
-        CommonModule,
-        UIRouterModule.forChild(),
-        CollapseModule,
-        AuthModule,
-    ],
-    declarations: [
-        NavbarComponent,
-        FooterComponent,
-    ],
-    exports: [
-        NavbarComponent,
-        FooterComponent,
-    ]
+  imports: [
+    CommonModule,
+    UIRouterModule.forChild(),
+    CollapseModule,
+    AuthModule,
+  ],
+  declarations: [
+    NavbarComponent,
+    FooterComponent,
+    <%_ if(filters.oauth) { -%>
+    OauthButtonsComponent,
+  ],
+  exports: [
+    NavbarComponent,
+    FooterComponent,
+    <%_ if(filters.oauth) { -%>
+    OauthButtonsComponent,
+  ]
 })
 class DirectivesModule {}

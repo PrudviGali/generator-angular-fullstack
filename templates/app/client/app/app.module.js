@@ -15,7 +15,6 @@
 // <%_ if(filters.auth) { _%>
 // // import ngValidationMatch from 'angular-validation-match';<% } %>
 
-
 // import {routeConfig} from './app.config';
 
 // <%_ if(filters.auth) { _%>
@@ -30,30 +29,6 @@
 // <%_ if(filters.socketio) { _%>
 // import socket from '../components/socket/socket.service';<% } %>
 
-// angular.module('<%= scriptAppName %>', [
-//   ngCookies,
-//   ngResource,
-//   ngSanitize,
-//   <%_ if(filters.socketio) { %>
-//   'btford.socket-io',<% } %>
-//   <%_ if(filters.ngroute) { %>
-//   ngRoute,<% } _%>
-//   <%_ if(filters.uirouter) { %>
-//   uiRouter,<% } _%>
-//   <%_ if(filters.uibootstrap) { %>
-//   uiBootstrap,<% } %>
-//   <%_ if(filters.auth) { %>
-//   _Auth,
-//   account,
-//   admin,<% } _%>
-//   navbar,
-//   footer,
-//   main,
-//   constants,
-//   <%_ if(filters.socketio) { _%>
-//   socket,<% } %>
-//   util
-// ])
 //   .config(routeConfig)
 //   <%_ if(filters.auth) { _%>
 //   .run(function($rootScope, $location, Auth) {
@@ -68,15 +43,8 @@
 //     });
 //   })<% } %>;
 
-// angular
-//   .element(document)
-//   .ready(() => {
-//     angular.bootstrap(document, ['<%= scriptAppName %>'], {
-//       strictDi: true
-//     });
-//   });
 
-import { NgModule, ErrorHandler, Injectable, } from '@angular/core';
+import { NgModule, ErrorHandler, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   HttpModule,
@@ -91,6 +59,7 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AppComponent } from './app.component';
 import { MainModule } from './main/main.module';
 import { DirectivesModule } from '../components/directives.module';
+import { AccountModule } from './account/account.module';
 // import { AdminModule } from './admin/admin.module';
 
 import constants from './app.constants';
@@ -117,6 +86,7 @@ export let AppModule = @NgModule({
         UIRouterModule.forRoot(),
         MainModule,
         DirectivesModule,
+        AccountModule,
         // AdminModule,
     ],
     declarations: [

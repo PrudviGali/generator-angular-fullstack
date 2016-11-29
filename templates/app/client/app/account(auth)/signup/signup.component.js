@@ -1,23 +1,28 @@
-'use strict';
 // @flow
-import angular from 'angular';
+import { Component } from '@angular/core';
+<%_ if(filters.uirouter) { -%>
+import { StateService } from 'ui-router-ng2';<% } %>
+<%_ if(filters.ngroute) { -%><% } %>
+import { AuthService } from '../../../components/auth/auth.service';
 
 <%_ if(filters.flow) { -%>
 type User = {
   name: string;
   email: string;
   password: string;
-};
-<%_ } -%>
+};<% } %>
 <%_ if(filters.ts) { -%>
 interface User {
   name: string;
   email: string;
   password: string;
-}
-<%_ } -%>
+}<% } %>
 
-export default class SignupController {
+export let SignupController = @Component({
+  selector: 'signup',
+  template: require('./signup.<%=templateExt%>'),
+})
+class SignupComponent {
   user: User = {
     name: '',
     email: '',
@@ -25,19 +30,17 @@ export default class SignupController {
   };
   errors = {};
   submitted = false;
-  Auth;
-  <%_ if(filters.ngroute) { -%>
-  $location;
-  <%_ } if(filters.uirouter) { -%>
-  $state;<% } %>
+  AuthService;
+  <%_ if(filters.ngroute) { -%><% } %>
+  <%_ if(filters.uirouter) { -%>
+  StateService;<% } %>
 
-  /*@ngInject*/
-  constructor(Auth<% if (filters.ngroute) { %>, $location<% } %><% if (filters.uirouter) { %>, $state<% } %>) {
-    this.Auth = Auth;
-    <%_ if(filters.ngroute) { -%>
-    this.$location = $location;
-    <%_ } if(filters.uirouter) { -%>
-    this.$state = $state;<% } %>
+  static parameters = [AuthService, <% if(filters.ngroute) { %><% } else { %>StateService<% } %>];
+  constructor(_AuthService_: AuthService, <% if(filters.ngroute) { %><% } else { %>_StateService_: StateService<% } %>) {
+    this.AuthService = _AuthService_;
+    <%_ if(filters.ngroute) { -%><% } %>
+    <%_ if(filters.uirouter) { -%>
+    this.StateService = _StateService_;<% } %>
   }
 
   register(form) {
